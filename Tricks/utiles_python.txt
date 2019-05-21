@@ -1,0 +1,43 @@
+    if not os.path.isfile(inputFile):
+        raise Exception("Input audio file not found!")
+
+
+################ lista de archivos recursivo dentro de un arbol de directorios #############
+from pathlib import Path
+local_files = list(map(str, Path(batch_download_output['work_folder']).rglob('*.*')))
+
+
+###### GET DEFAULT DICT PYTHON #####################################
+
+# The get() method on dicts
+# and its "default" argument
+
+name_for_userid = {
+    382: "Alice",
+    590: "Bob",
+    951: "Dilbert",
+}
+
+def greeting(userid):
+    return "Hi %s!" % name_for_userid.get(userid, "there")
+
+>>> greeting(382)
+"Hi Alice!"
+
+>>> greeting(333333)
+"Hi there!"
+
+
+############### VARIADIC ARGUMENT ################
+
+def save_ranking(*args, **kwargs):
+    print(args)     
+    print(kwargs)
+save_ranking('ming', 'alice', 'tom', fourth='wilson', fifth='roy')     # ('ming', 'alice', 'tom')
+# {'fourth': 'wilson', 'fifth': 'roy'}
+
+
+#############
+Set no admite la operación sumar
+
+

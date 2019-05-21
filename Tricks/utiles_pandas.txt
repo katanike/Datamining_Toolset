@@ -1,0 +1,15 @@
+# Indice con conteo incremental por grupos
+df['idx'] = df.groupby(['a', 'b']).cumcount() 
+
+# Indice del grupo
+files.groupby(['a', 'b']).ngroup()
+
+# Reset index quitando el viejo 
+files.reset_index(drop=True)
+
+# Pegar DF por un lado
+pd.concat([left_df, rigth_df], axis=1)
+
+# Aplicacion con argumentos extra
+my_series.apply(your_function, args=(2,3,4), extra_kw=1)
+dataframe.apply(lambda x: fun(x, cte), axis=1)

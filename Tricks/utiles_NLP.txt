@@ -1,0 +1,41 @@
+####### TOKENIZADOR DE FRASES ESPAÑOL #########
+
+import nltk.data
+ 
+para = "Hola amigos. Gracias por ver este video. Saludos"
+tokenizer = nltk.data.load('tokenizers/punkt/spanish.pickle')
+print tokenizer.tokenize(para)
+
+
+############ LIMPIEZA ######################
+def quitar_acentos(texto):
+    import re
+    from unicodedata import normalize
+    
+    # -> NFD y eliminar diacríticos
+    s = re.sub(
+        r"([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+", r"\1", 
+        normalize( "NFD", texto), 0, re.I
+    )
+    
+    # -> NFC
+    s = normalize( 'NFC', s)
+    return s
+
+
+def quitar_stopwords(texto):
+    from nltk.corpus import stopwords
+    #nltk.download('stopwords')
+    
+    text_vec = texto.split()
+    text_vec = list(filter(lambda x: x not in stopwords.words('spanish') and x != " " and len(x)>2, text_vec))
+    return text_vec
+
+
+def stemming(texto):
+    from nltk.stem import SnowballStemmer
+    stemmer = SnowballStemmer('spanish')
+    vec = [stemmer.stem(w) for w in texto]
+    return " ".join(vec)
+
+
